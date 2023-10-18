@@ -1,0 +1,414 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="foot.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.22.2"></script>
+
+    <style>
+        html, body {
+            min-height: 100%;
+        }
+
+        body, div, form, input, select, p {
+            padding: 0;
+            margin: 0;
+            outline: none;
+            font-family: Roboto, Arial, sans-serif;
+            font-size: 16px;
+            color: #eee;
+        }
+
+        body {
+            background: url("'Black and Orange Simple Car Repair Shop Logo.png'") no-repeat center;
+            background-size: cover;
+        }
+
+        h1, h2 {
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+
+        h2 {
+            margin: 0 0 0 8px;
+        }
+
+        .main-block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .left-part, form {
+            padding: 25px;
+        }
+
+        .left-part {
+            text-align: center;
+        }
+
+        .fa-graduation-cap {
+            font-size: 72px;
+        }
+
+        form {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input, select {
+            padding: 5px;
+            margin-bottom: 30px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #eee;
+        }
+
+            input::placeholder {
+                color: #eee;
+            }
+
+        option:focus {
+            border: none;
+        }
+
+        option {
+            background: black;
+            border: none;
+        }
+
+        .checkbox input {
+            margin: 0 10px 0 0;
+            vertical-align: middle;
+        }
+
+        .checkbox a {
+            color: #26a9e0;
+        }
+
+            .checkbox a:hover {
+                color: #85d6de;
+            }
+
+        .btn-item, button {
+            padding: 10px 5px;
+            margin-top: 20px;
+            border-radius: 5px;
+            border: none;
+            background: #26a9e0;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            color: #fff;
+        }
+
+        .btn-item {
+            display: inline-block;
+            margin: 20px 5px 0;
+        }
+
+        button {
+            width: 100%;
+        }
+
+            button:hover, .btn-item:hover {
+                background: #85d6de;
+            }
+
+        @media (min-width: 568px) {
+            html, body {
+                height: 100%;
+            }
+
+            .main-block {
+                flex-direction: row;
+                height: calc(100% - 50px);
+            }
+
+            .left-part, form {
+                flex: 1;
+                height: auto;
+            }
+        }
+
+        #loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 1;
+            width: 120px;
+            height: 120px;
+            margin: -76px 0 0 -76px;
+            border: 16px solid white;
+            border-radius: 50%;
+            border-top: 16px solid orangered;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Add animation to "page content" */
+        .animate-bottom {
+            position: relative;
+            -webkit-animation-name: animatebottom;
+            -webkit-animation-duration: 1s;
+            animation-name: animatebottom;
+            animation-duration: 1s
+        }
+
+        @-webkit-keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0px;
+                opacity: 1
+            }
+        }
+
+        @keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
+    </style>
+</head>
+<body onload="myFunction()" style="margin:0;" class="w3-white">
+    <div id="loader"></div>
+    <div style="display:none;" id="myDiv" class="animate-bottom">
+        <div class="background"></div>
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <a href="About us.html">About</a>
+            <a href="home.html">home</a>
+            <a href="Book.html">Book service</a>
+            <a href="Admin.html">Admin</a>
+
+        </div>
+        <button class="openbtn" onclick="openNav()">☰</button>
+
+
+        <div class="main-block">
+            <div class="left-part">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>Register to our courses</h1>
+                <p>W3docs provides free learning materials for programming languages like HTML, CSS, Java Script, PHP etc.</p>
+                <div class="btn-group">
+                    <a class="btn-item" href="https://www.w3docs.com/learn-html.html">Learn HTML</a>
+                    <a class="btn-item" href="https://www.w3docs.com/quiz/#">Select Quiz</a>
+                </div>
+            </div>
+            <form action="/">
+                <div class="title">
+                    <i class="fas fa-pencil-alt"></i>
+                    <h2>Register here</h2>
+                </div>
+                <div class="info">
+                    <input class="fname" type="text" name="name" placeholder="Full name">
+                    <input type="text" name="name" placeholder="Email">
+                    <input type="text" name="name" placeholder="Phone number">
+                    <input type="password" name="name" placeholder="Password">
+                    <select>
+                        <option value="course-type" selected>Course type*</option>
+                        <option value="short-courses">Short courses</option>
+                        <option value="featured-courses">Featured courses</option>
+                        <option value="undergraduate">Undergraduate</option>
+                        <option value="diploma">Diploma</option>
+                        <option value="certificate">Certificate</option>
+                        <option value="masters-degree">Masters degree</option>
+                        <option value="postgraduate">Postgraduate</option>
+                    </select>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" name="checkbox"><span>I agree to the <a href="https://www.w3docs.com/privacy-policy">Privacy Poalicy for W3Docs.</a></span>
+                </div>
+                <button type="submit" href="/">Submit</button>
+            </form>
+        </div>
+    </div>
+
+        <script>
+
+
+            let { data: Bookings, error } = await supabase
+                .from('Bookings')
+                .select('booking_id')
+
+            let { data: Bookings, error } = await supabase
+                .from('Bookings')
+                .select('booked_at')
+
+            let { data: Bookings, error } = await supabase
+                .from('Bookings')
+                .select('customer_id')
+
+            let { data: Bookings, error } = await supabase
+                .from('Bookings')
+                .select('total')
+
+            let { data: Bookings, error } = await supabase
+                .from('Bookings')
+                .select('address')
+
+            let { data: Bookings, error } = await supabase
+                .from('Bookings')
+                .select('services')
+
+            let { data: Bookings, error } = await supabase
+                .from('Bookings')
+                .select('vehicle_type')
+
+            let { data: Bookings, error } = await supabase
+                .from('Bookings')
+                .select('book_for')
+
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+            function openNav() {
+                document.getElementById("mySidebar").style.width = "250px";
+                document.getElementById("main").style.marginLeft = "250px";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidebar").style.width = "0";
+                document.getElementById("main").style.marginLeft = "0";
+            }
+        </script>
+        <script src="javas.js"></script>
+
+
+        <script>
+            function myFunction() {
+                var x = document.getElementById("myDate").value;
+                document.getElementById("demo").innerHTML = x;
+            }
+        </script>
+
+
+        <!--The connection string to Supabase-->
+        <!--Initialize the Supabase client with your Supabase project URL and API key.-->
+        <script>
+            const supabaseUrl = 'https://yourproject.supabase.co';
+            const supabaseKey = 'your-api-key';
+            const supabase = createClient(supabaseUrl, supabaseKey);
+        </script>
+
+        <script>
+            async function submitForm(event) {
+                event.preventDefault();
+
+                const name = document.getElementById('services').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const date = document.getElementById('date').value;
+                const vehicle = document.getElementById('vehicle').value;
+                const service = document.getElementById('service').value;
+                const comments = document.getElementById('comments').value;
+
+                try {
+                    const { data, error } = await supabase
+                        .from('Services') // Replace with your table name
+                        .insert([
+                            {
+                                name,
+                                email,
+                                phone,
+                                date,
+                                vehicle,
+                                service,
+                                comments
+                            }
+                        ]);
+
+                    if (error) {
+                        console.error('Error inserting data:', error);
+                        // Handle error here (e.g., show an error message to the user)
+                    } else {
+                        console.log('Data inserted successfully:', data);
+                        // Optionally, clear the form or perform other actions
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    // Handle error here (e.g., show an error message to the user)
+                }
+            }
+        </script>
+        <script>
+            var myVar;
+
+            function myFunction() {
+                myVar = setTimeout(showPage, 3000);
+            }
+
+            function showPage() {
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("myDiv").style.display = "block";
+            }
+        </script>
+</body>
+</html>
